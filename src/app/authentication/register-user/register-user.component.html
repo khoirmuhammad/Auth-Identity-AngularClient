@@ -1,0 +1,178 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Register</h1>
+
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      <span [innerHTML]="errorMessage"></span>
+    </div>
+    <div *ngIf="!showError && successMessage !== ''" class="alert alert-success" role="alert">
+      <span [innerHTML]="successMessage"></span>
+    </div>
+
+    <form
+      [formGroup]="registerForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="registerUser(registerForm.value)"
+    >
+      <div class="mb-3 row">
+        <label for="firstName" class="col-form-label col-sm-2"
+          >First Name:</label
+        >
+        <div class="col-md-5">
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="lastName" class="col-form-label col-sm-2">Last Name:</label>
+        <div class="col-md-5">
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="email" class="col-form-label col-sm-2">Email:</label>
+        <div class="col-md-5">
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('email').invalid &&
+              Control('email').touched &&
+              hasError('email', 'email')
+            "
+            >Please provide a valid email </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('email').invalid &&
+              Control('email').touched &&
+              hasError('email', 'required')
+            "
+            >Email is required </em
+          >
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="password" class="col-form-label col-sm-2">Password:</label>
+        <div class="col-md-5">
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('password').invalid &&
+              Control('password').touched &&
+              hasError('password', 'required')
+            "
+            >Password is required </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('password').invalid &&
+              Control('password').touched &&
+              hasError('password', 'minlength')
+            "
+            >Password at least has 7 characters </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('password').invalid &&
+              Control('password').touched &&
+              hasError('password', 'hasNonAlphaNumeric')
+            "
+            >Passwords must have at least one non alphanumeric character </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('password').invalid &&
+              Control('password').touched &&
+              hasError('password', 'hasCapitalCase')
+            "
+            >Passwords must have at least one uppercase (A-Z) </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('password').invalid &&
+              Control('password').touched &&
+              hasError('password', 'hasNumber')
+            "
+            >Passwords must have at least one digit (0-9) </em
+          >
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="confirm" class="col-form-label col-sm-2"
+          >Confirm Password:</label
+        >
+        <div class="col-md-5">
+          <input
+            type="password"
+            id="confirm"
+            formControlName="confirm"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('confirm').invalid &&
+              Control('confirm').touched &&
+              hasError('confirm', 'required')
+            "
+            >Confirm Password is required </em
+          >
+          <em
+            class="invalid-text"
+            *ngIf="
+              Control('confirm').invalid &&
+              Control('confirm').touched &&
+              hasError('confirm', 'mustMatch')
+            "
+            >Confirm Password must be matched </em
+          >
+        </div>
+      </div>
+      <br />
+      <div class="mb-3 row">
+        <div class="col-md-1">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="!registerForm.valid"
+          >
+            Register
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
