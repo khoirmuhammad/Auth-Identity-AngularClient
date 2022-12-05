@@ -2,8 +2,8 @@
 Basically this code is stitching / wiring with https://github.com/khoirmuhammad/Auth-Identity.
 
 ## Registration
-- We put double validation both in client or backend service. Client validation can make user easier user work with from, whereas backend validation can prevent from hack attacker that try to penetrate our application. In clieant validation we able to see built-in standard validation by angular or make custom validation like CustomPasswordValidatorService
-- To intercept our HTTP request and response we choose interceptor mechanism. For instance modifying response message from backend service by ErrorHandlerService
+- We put double validation both in client or backend service. Client validation can make user easier user work with form, whereas backend validation can prevent from hack attacker that try to penetrate our application. In clieant validation we able to utilize built-in standard validation by angular or make custom validation like CustomPasswordValidatorService
+- In order To intercept our HTTP request and response we choose interceptor mechanism. For instance modifying response message from backend service by ErrorHandlerService. There for it will prevent DRY concept. I mean we don't need modifying http response message each component
 
 ## Email Confirmation or Activation
 - Once all of values pass from validation. The next process is saving user data and mapping role by ASP NET Core Identity User Manager. The subsequent process is sending email to confirm account. Here the following process
