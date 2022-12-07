@@ -27,6 +27,10 @@ export class ErrorHandlerService {
       return this.handleNotFound(error);
     } else if (error.status === 400) {
       return this.handleBadRequest(error);
+    } else if(error.status === 401) {
+      return this.handleUnauthorized(error);
+    } else if(error.status === 403) {
+      return this.handleForbidden(error);
     } else {
       return error.error ? error.error : error.message;
     }
@@ -62,8 +66,33 @@ export class ErrorHandlerService {
 
     }
 
+    if (error.error.errors.Email !== undefined) {
+      const email = Object.values(error.error.errors.Email);
+
+      email.map((m) => {
+        message += m + '<br>';
+      });
+      return message.slice(0, -4);
+
+    }
+
     return error.error ? error.error : error.message;
 
+  }
+
+  private handleUnauthorized = (error: HttpErrorResponse) => {
+    if(this.router.url === '/authentication/login') {
+      return 'Authentication failed. Wrong Username or Password';
+    }
+    else {
+      this.router.navigate(['/authentication/login']);
+      return error.message;
+    }
+  }
+
+  private handleForbidden = (error: HttpErrorResponse) => {
+    this.router.navigate(["/forbidden"], { queryParams: { returnUrl: this.router.url }});
+    return "Forbidden";
   }
 
 }
