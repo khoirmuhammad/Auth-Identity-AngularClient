@@ -9,7 +9,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 })
 export class MenuComponent implements OnInit {
 
-  isCollapsed: boolean = false;
+  isCollapsed: boolean = true;
   public isUserAuthenticated: boolean = false;
 
   constructor(private authService: AuthenticationService,

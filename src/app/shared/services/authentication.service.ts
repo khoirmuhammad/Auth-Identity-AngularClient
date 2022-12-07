@@ -7,6 +7,8 @@ import { CustomEncoder } from '../helpers/custom-encoder';
 import { EnvironmentUrlService } from './environment-url.service';
 import { Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IForgotPassword } from 'src/app/interfaces/IForgotPassword';
+import { IResetPassword } from 'src/app/interfaces/IResetPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +63,14 @@ export class AuthenticationService {
     const decodedToken = this.jwtHelper.decodeToken(token);
     const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
     return role === 'Administrator';
+  }
+
+  public forgotPassword = (body: IForgotPassword) => {
+    return this.http.post(this.createCompleteRoute('api/Account/ForgotPassword'), body);
+  }
+
+  public resetPassword = (body: IResetPassword) => {
+    return this.http.post(this.createCompleteRoute('api/Account/ResetPassword'), body);
   }
 
   private createCompleteRoute = (route: string) => {

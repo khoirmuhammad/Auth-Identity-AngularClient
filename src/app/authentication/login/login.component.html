@@ -26,6 +26,9 @@
                   <em class="invalid-text" *ngIf="Control('password').invalid && Control('password').touched && hasError('password', 'required')">Password is required</em>
               </div>
           </div>
+          <div>
+            <a [routerLink]="['/authentication/forgotpassword']"> Forgot Password </a>
+          </div>
           <br>
           <div class="mb-3 row">
               <div class="col-md-1">
