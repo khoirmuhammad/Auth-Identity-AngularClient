@@ -1,27 +1,13 @@
-# AuthIdentityAngular
+# Identity Authentication - Angular Client
+Basically this code is stitching / wiring with https://github.com/khoirmuhammad/Auth-Identity.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+## Registration
+- We put double validation both in client or backend service. Client validation can make user easier user work with form, whereas backend validation can prevent from hack attacker that try to penetrate our application. In clieant validation we able to utilize built-in standard validation by angular or make custom validation like CustomPasswordValidatorService
+- In order To intercept our HTTP request and response we choose interceptor mechanism. For instance modifying response message from backend service by ErrorHandlerService. There for it will prevent DRY concept. I mean we don't need modifying http response message each component
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Email Confirmation or Activation
+- Once all of values pass from validation. The next process is saving user data and mapping role by ASP NET Core Identity User Manager. The subsequent process is sending email to confirm account. Here the following process
+1. In UserRegistration body, we sent callback URL that will be used in mail content
+2. In backend service this url will be modified i.e adding token and email as query string before appending on mail maessage
+3. After users receive the email, they will click to URL (callback URL in step 1)
+4. Finally angular client will call method EmailConfirmation in order to proceed the activation
